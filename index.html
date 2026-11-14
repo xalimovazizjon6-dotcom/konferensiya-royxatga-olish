@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konferensiya ro'yxatga olish AT</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background: linear-gradient(135deg, #0f172a, #1e293b); color: #f8fafc; min-height: 100vh; padding: 30px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        header { text-align: center; padding: 30px; background: rgba(255,255,255,0.05); border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 25px; backdrop-filter: blur(10px); }
+        header h1 { font-size: 28px; color: #38bdf8; margin-bottom: 8px; }
+        header p { color: #94a3b8; font-size: 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .card { background: rgba(30, 41, 59, 0.8); border: 1px solid #334155; border-radius: 14px; padding: 20px; transition: 0.3s; }
+        .card:hover { transform: translateY(-4px); border-color: #38bdf8; box-shadow: 0 10px 25px rgba(56,189,248,0.15); }
+        .card h2 { font-size: 18px; color: #38bdf8; margin-bottom: 12px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+        ul { list-style: none; }
+        li { padding: 8px 12px; background: #0f172a; margin-bottom: 8px; border-radius: 8px; border-left: 3px solid #38bdf8; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 Konferensiya ro'yxatga olish AT</h1>
+            <p>Xalqaro ilmiy-amaliy anjuman ishtirokchilari va sho'balarini boshqarish tizimi</p>
+        </header>
+        <div class="grid">
+            <div class="card" id="section-card">
+                <h2>📌 Konferensiya sho'balari</h2>
+                <ul id="sections-list">
+                    <li>Sun'iy intellekt va ma'lumotlar tahlili</li>
+                    <li>Kiberxavfsizlik va tarmoq himoyasi</li>
+                    <li>Dasturiy injiniring va veb-texnologiyalar</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
