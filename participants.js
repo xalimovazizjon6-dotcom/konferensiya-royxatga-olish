@@ -6,3 +6,7 @@ const participants = [
 function addParticipant(name, section, role) {
     participants.push({ name, section, role });
 }
+
+function getParticipantCount() {
+    return participants.length;
+}
