@@ -3,38 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konferensiya ro'yxatga olish AT</title>
+    <title>Konferensiya ro'yxatga olish AT — v1.0.0</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
         body { background: linear-gradient(135deg, #0f172a, #1e293b); color: #f8fafc; min-height: 100vh; padding: 30px; }
-        .container { max-width: 900px; margin: 0 auto; }
+        .container { max-width: 1050px; margin: 0 auto; }
         header { text-align: center; padding: 30px; background: rgba(255,255,255,0.05); border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 25px; backdrop-filter: blur(10px); }
         header h1 { font-size: 28px; color: #38bdf8; margin-bottom: 8px; }
         header p { color: #94a3b8; font-size: 15px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-        .card { background: rgba(30, 41, 59, 0.8); border: 1px solid #334155; border-radius: 14px; padding: 20px; transition: 0.3s; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: rgba(30, 41, 59, 0.85); border: 1px solid #334155; border-radius: 14px; padding: 22px; transition: 0.3s; }
         .card:hover { transform: translateY(-4px); border-color: #38bdf8; box-shadow: 0 10px 25px rgba(56,189,248,0.15); }
-        .card h2 { font-size: 18px; color: #38bdf8; margin-bottom: 12px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+        .card h2 { font-size: 18px; color: #38bdf8; margin-bottom: 14px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
         ul { list-style: none; }
-        li { padding: 8px 12px; background: #0f172a; margin-bottom: 8px; border-radius: 8px; border-left: 3px solid #38bdf8; font-size: 14px; }
+        li { padding: 10px 12px; background: #0f172a; margin-bottom: 8px; border-radius: 8px; border-left: 3px solid #38bdf8; font-size: 14px; }
+        input, select, button { width: 100%; padding: 10px 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: #f8fafc; font-size: 14px; }
+        button { background: linear-gradient(90deg, #0284c7, #38bdf8); color: #0f172a; font-weight: bold; cursor: pointer; border: none; transition: 0.2s; }
+        button:hover { opacity: 0.9; }
+        .badge-preview { background: linear-gradient(135deg, #1e3a8a, #0f172a); border: 2px dashed #38bdf8; border-radius: 12px; padding: 18px; text-align: center; margin-top: 10px; }
+        .badge-preview h3 { color: #38bdf8; font-size: 19px; margin-bottom: 6px; }
+        .badge-preview span { display: inline-block; background: #38bdf8; color: #0f172a; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-top: 8px; }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>🎓 Konferensiya ro'yxatga olish AT</h1>
-            <p>Xalqaro ilmiy-amaliy anjuman ishtirokchilari va sho'balarini boshqarish tizimi</p>
+            <p>Xalqaro ilmiy-amaliy anjuman ishtirokchilari, sho'balari va beydjiklarini boshqarish tizimi</p>
         </header>
         <div class="grid">
-            <div class="card" id="section-card">
-                <h2>📌 Konferensiya sho'balari</h2>
-                <ul id="sections-list">
-                    <li>Sun'iy intellekt va ma'lumotlar tahlili</li>
-                    <li>Kiberxavfsizlik va tarmoq himoyasi</li>
-                    <li>Dasturiy injiniring va veb-texnologiyalar</li>
-                </ul>
+            <div class="card">
+                <h2>📌 1. Konferensiya sho'balari</h2>
+                <ul id="sections-list"></ul>
+            </div>
+            <div class="card">
+                <h2>📝 2. Ishtirokchi ro'yxatga olish</h2>
+                <input type="text" id="p-name" placeholder="F.I.Sh kiriting (masalan: Xalimov Azizjon)">
+                <select id="p-section"></select>
+                <select id="p-role">
+                    <option value="Ma'ruzachi">Ma'ruzachi</option>
+                    <option value="Ishtirokchi">Ishtirokchi</option>
+                    <option value="Ekspert">Ekspert</option>
+                </select>
+                <button onclick="register()">Ro'yxatdan o'tkazish va Beydjik olish</button>
+                <ul id="participants-list"></ul>
+            </div>
+            <div class="card">
+                <h2>🪪 3. Elektron Beydjik (Badge)</h2>
+                <div class="badge-preview" id="badge-box">
+                    <p style="color:#94a3b8; font-size:13px;">ANJUMA ISHTIROKCHISI</p>
+                    <h3 id="b-name">Xalimov Azizjon</h3>
+                    <p id="b-sec" style="font-size:14px; color:#cbd5e1;">Kiberxavfsizlik va tarmoq himoyasi</p>
+                    <span id="b-role">MA'RUZACHI</span>
+                </div>
             </div>
         </div>
     </div>
+    <script src="sections.js"></script>
+    <script src="participants.js"></script>
+    <script src="badge.js"></script>
+    <script>
+        const secList = document.getElementById('sections-list');
+        const secSelect = document.getElementById('p-section');
+        sections.forEach(s => {
+            secList.innerHTML += `<li><strong>${s.title}</strong><br><small style="color:#94a3b8;">📍 ${s.room}</small></li>`;
+            secSelect.innerHTML += `<option value="${s.title}">${s.title}</option>`;
+        });
+        function renderParticipants() {
+            const pList = document.getElementById('participants-list');
+            pList.innerHTML = '';
+            participants.forEach(p => {
+                pList.innerHTML += `<li><strong>${p.name}</strong> — ${p.role}<br><small style="color:#38bdf8;">${p.section}</small></li>`;
+            });
+        }
+        function register() {
+            const name = document.getElementById('p-name').value.trim();
+            const sec = secSelect.value;
+            const role = document.getElementById('p-role').value;
+            if (!name) return;
+            addParticipant(name, sec, role);
+            renderParticipants();
+            document.getElementById('b-name').innerText = name;
+            document.getElementById('b-sec').innerText = sec;
+            document.getElementById('b-role').innerText = role.toUpperCase();
+            document.getElementById('p-name').value = '';
+        }
+        renderParticipants();
+    </script>
 </body>
 </html>
