@@ -3,3 +3,7 @@ const sections = [
     { id: 2, title: "Kiberxavfsizlik va tarmoq himoyasi", room: "204-auditoriya" },
     { id: 3, title: "Dasturiy injiniring va veb-texnologiyalar", room: "305-auditoriya" }
 ];
+
+function getSectionById(id) {
+    return sections.find(sec => sec.id === id);
+}
